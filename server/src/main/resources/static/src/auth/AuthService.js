@@ -9,22 +9,6 @@
 
         // Promise-based API
         return {
-            /*     login: function (user) {
-             return userService.loadUser(user.username)
-             .then(function (userFound) {
-
-             if (userFound.password == user.password) {
-             authenticatedUser = userFound;
-             return $q.resolve();
-             } else {
-             return $q.reject('Username/Pasword inválido');
-             }
-
-             }).catch(function (err) {
-             return $q.reject('Username/Pasword inválido');
-             });
-
-             },*/
 
             login: function (data) {
                 return $http.post('/auth', {

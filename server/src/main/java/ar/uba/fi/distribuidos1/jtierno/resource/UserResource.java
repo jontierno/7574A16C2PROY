@@ -1,15 +1,12 @@
 package ar.uba.fi.distribuidos1.jtierno.resource;
 
 import ar.uba.fi.distribuidos1.jtierno.model.User;
-import ar.uba.fi.distribuidos1.jtierno.security.JwtUser;
 import ar.uba.fi.distribuidos1.jtierno.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
