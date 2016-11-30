@@ -16,6 +16,7 @@
     self.exit = exit;
     authService.getCurrentUser().then(function (user){
      if(user) {
+         console.log(user);
         $scope.currentUser = user;
      }  else {
       $state.go("login");

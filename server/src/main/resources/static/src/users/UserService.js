@@ -7,8 +7,10 @@
     function UserService($q, $http, localStorageService) {
 
         return {
-            loadUser: function (username) {
-                return $http.get("/user");
+            loadUser: function () {
+                return $http.get("/user").then(function (response) {
+                    return $q.resolve(response.data);
+                });
             },
             save: function (user) {
                 var i = findUser(user.username);

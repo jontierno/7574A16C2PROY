@@ -32,7 +32,7 @@
                     password: data.password
                 }).then(function (response) {
                         localStorageService.set('id_token', response.data.token);
-                        return userService.loadUser(data.username)
+                        return userService.loadUser()
                             .then(function (userFound) {
                                 authenticatedUser = userFound;
                                 return $q.resolve();
@@ -42,13 +42,18 @@
                 });
             },
             getCurrentUser: function () {
-                var def = $q.defer();
                 if (authenticatedUser) {
-                    def.resolve(authenticatedUser)
+                    var def = $q.defer();
+                    def.resolve(authenticatedUser);
+                    return def.promise;
                 } else {
-                    def.reject();
+                    return userService.loadUser()
+                        .then(function (userFound) {
+                            authenticatedUser = userFound;
+                            return $q.resolve(authenticatedUser);
+                        });
                 }
-                return def.promise;
+
             },
             logout: function () {
                 var deferred = $q.defer();
