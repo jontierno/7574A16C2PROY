@@ -1,6 +1,6 @@
 angular
-    .module('fiubaApp', ['ngMaterial','ui.router','login','auth', 'career', 'register', 'main', 'LocalStorageModule'])
-    .config(function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider){
+    .module('fiubaApp', ['ngMaterial','ui.router','login','auth', 'career', 'register', 'main', 'LocalStorageModule','angular-jwt'])
+    .config(function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider,localStorage,jwtOptionsProvider){
 
      //   $mdIconProvider
       //      .defaultIconSet("./assets/svg/avatars.svg", 128)
@@ -10,24 +10,37 @@ angular
           //  .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
            // .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
             //.icon("phone"      , "./assets/svg/phone.svg"       , 512);
+    jwtOptionsProvider.config({
+                    tokenGetter: ['myService', function(myService) {
+                        if (options && options.url.substr(options.url.length - 5) == '.html') {
+                            return null;
+                        }
+                        return localStorage.getItem('id_token');
+                    }],
+                    authPrefix: '',
+                    unauthenticatedRedirector: ['$state', function($state) {
+                            $state.go('login');
+                    }]
+    });
 
- $mdThemingProvider
-    .theme('default')
-    .primaryPalette('indigo')
-    .accentPalette('pink')
-    .warnPalette('red')
-    .backgroundPalette('blue-grey');
-          //
-      // For any unmatched url, redirect to /state1
+    $httpProvider.interceptors.push('jwtInterceptor');
+    $mdThemingProvider
+        .theme('default')
+        .primaryPalette('indigo')
+        .accentPalette('pink')
+        .warnPalette('red')
+        .backgroundPalette('blue-grey');
+              //
+          // For any unmatched url, redirect to /state1
       $urlRouterProvider.otherwise("/home");
-      //
-      // Now set up the states
+          //
+          // Now set up the states
       $stateProvider
         .state('app', {
           templateUrl: "src/main/view/main.html",
           controller: 'MainController as main',
           abstract: true,
-          resolve: {
+         /* resolve: {
 
                 // A string value resolves to a service
                 authService: 'authService',
@@ -45,7 +58,10 @@ angular
 
                     return defer.promise;
                 }
-            }
+            }*/
+         data: {
+             requiresLogin:true
+         }
         })
         .state('app.wellcome', {
           url: "/home",
@@ -68,6 +84,10 @@ angular
           url: "/viewregisters",
           templateUrl: "src/register/view/viewRegisters.html",
           controller: 'ViewRegistersController as regCtrl'
-        }); ; 
+        }); ;
 
-    });
+    })
+    .run(function(authManager){
+        authManager.checkAuthOnRefresh();
+        authManager.redirectWhenUnauthenticated();
+    })
