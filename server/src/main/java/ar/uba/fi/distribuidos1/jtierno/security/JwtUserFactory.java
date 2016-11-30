@@ -3,7 +3,8 @@ package ar.uba.fi.distribuidos1.jtierno.security;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ar.uba.fi.distribuidos1.jtierno.security.JwtUser;
+import ar.uba.fi.distribuidos1.jtierno.model.security.Authority;
+import ar.uba.fi.distribuidos1.jtierno.model.security.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

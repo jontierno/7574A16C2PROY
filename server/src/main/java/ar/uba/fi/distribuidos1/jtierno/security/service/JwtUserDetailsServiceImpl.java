@@ -1,12 +1,14 @@
 package ar.uba.fi.distribuidos1.jtierno.security.service;
 
+import ar.uba.fi.distribuidos1.jtierno.model.security.User;
+import ar.uba.fi.distribuidos1.jtierno.security.JwtUserFactory;
+import ar.uba.fi.distribuidos1.jtierno.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.zerhusen.model.security.User;
-import org.zerhusen.security.JwtUserFactory;
+
 
 
 /**
