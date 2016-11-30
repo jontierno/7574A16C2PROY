@@ -8,7 +8,7 @@ import java.util.Set;
  * Created by jonathan on 29/11/16.
  */
 @Entity
-public class FiubaUser {
+public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;

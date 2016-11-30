@@ -1,4 +1,4 @@
-package ar.uba.fi.distribuidos1.jtierno.model.security;
+package ar.uba.fi.distribuidos1.jtierno.security.model;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,8 +19,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "USER_SEC")
-public class User {
+@Table(name = "SECURITY_USER")
+public class SecurityUser {
 
     @Id
     @Column(name = "ID")
@@ -47,11 +46,6 @@ public class User {
     @NotNull
     @Size(min = 4, max = 50)
     private String lastname;
-
-    @Column(name = "EMAIL", length = 50)
-    @NotNull
-    @Size(min = 4, max = 50)
-    private String email;
 
     @Column(name = "ENABLED")
     @NotNull
@@ -107,14 +101,6 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Boolean getEnabled() {

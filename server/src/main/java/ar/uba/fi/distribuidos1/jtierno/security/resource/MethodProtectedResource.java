@@ -1,4 +1,4 @@
-package ar.uba.fi.distribuidos1.jtierno.security.controller;
+package ar.uba.fi.distribuidos1.jtierno.security.resource;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("protected")
-public class MethodProtectedRestController {
+public class MethodProtectedResource {
 
     /**
      * This is an example of some different kinds of granular restriction for endpoints. You can use the built-in SPEL expressions

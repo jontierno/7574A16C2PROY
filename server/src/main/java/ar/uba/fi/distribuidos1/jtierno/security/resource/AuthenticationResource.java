@@ -1,4 +1,4 @@
-package ar.uba.fi.distribuidos1.jtierno.security.controller;
+package ar.uba.fi.distribuidos1.jtierno.security.resource;
 
 import ar.uba.fi.distribuidos1.jtierno.security.JwtAuthenticationRequest;
 import ar.uba.fi.distribuidos1.jtierno.security.JwtTokenUtil;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-public class AuthenticationRestController {
+public class AuthenticationResource {
 
     @Value("${jwt.header}")
     private String tokenHeader;

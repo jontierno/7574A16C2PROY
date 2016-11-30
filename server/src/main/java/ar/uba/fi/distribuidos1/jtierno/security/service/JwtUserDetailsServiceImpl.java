@@ -1,8 +1,8 @@
 package ar.uba.fi.distribuidos1.jtierno.security.service;
 
-import ar.uba.fi.distribuidos1.jtierno.model.security.User;
+import ar.uba.fi.distribuidos1.jtierno.security.model.SecurityUser;
 import ar.uba.fi.distribuidos1.jtierno.security.JwtUserFactory;
-import ar.uba.fi.distribuidos1.jtierno.security.repository.UserRepository;
+import ar.uba.fi.distribuidos1.jtierno.security.repository.SecurityUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,11 +18,11 @@ import org.springframework.stereotype.Service;
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private SecurityUserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        SecurityUser user = userRepository.findByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));

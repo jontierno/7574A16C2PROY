@@ -1,6 +1,6 @@
 package ar.uba.fi.distribuidos1.jtierno.repository;
 
-import ar.uba.fi.distribuidos1.jtierno.model.FiubaUser;
+import ar.uba.fi.distribuidos1.jtierno.model.User;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface UserRepository {
 
-    List<FiubaUser> findByUserName(String userName);
+    List<User> findByUserName(String userName);
 }

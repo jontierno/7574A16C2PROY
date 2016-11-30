@@ -1,4 +1,4 @@
-package ar.uba.fi.distribuidos1.jtierno.model.security;
+package ar.uba.fi.distribuidos1.jtierno.security.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ public class Authority {
     private AuthorityName name;
 
     @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
-    private List<User> users;
+    private List<SecurityUser> users;
 
     public Long getId() {
         return id;
@@ -37,11 +37,11 @@ public class Authority {
         this.name = name;
     }
 
-    public List<User> getUsers() {
+    public List<SecurityUser> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<SecurityUser> users) {
         this.users = users;
     }
 }
