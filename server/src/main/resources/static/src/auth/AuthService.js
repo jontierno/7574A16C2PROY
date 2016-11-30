@@ -1,57 +1,67 @@
-(function(){
-  'use strict';
+(function () {
+    'use strict';
 
-  angular.module('auth')
-         .service('authService', ['$q','userService', AuthService]);
+    angular.module('auth')
+        .service('authService', ['$q', '$http', 'userService', 'localStorageService', AuthService]);
 
-  /**
-   * Users DataService
-   * Uses embedded, hard-coded data model; acts asynchronously to simulate
-   * remote data service call(s).
-   *
-   * @returns {{loadAll: Function}}
-   * @constructor
-   */
-  function AuthService($q, userService){
-    var authenticatedUser =  null;
+    function AuthService($q, $http, userService, localStorageService) {
+        var authenticatedUser = null;
 
-    // Promise-based API
-    return {
-      login : function(user) {
-        var deferred = $q.defer();
-        return userService.loadUser(user.username)
-          .then(function (userFound) {
+        // Promise-based API
+        return {
+            /*     login: function (user) {
+             return userService.loadUser(user.username)
+             .then(function (userFound) {
 
-              if(userFound.password == user.password) {
-                authenticatedUser = userFound;
-                return $q.resolve();
-              } else {
-                return $q.reject('Username/Pasword inválido');
-              }
+             if (userFound.password == user.password) {
+             authenticatedUser = userFound;
+             return $q.resolve();
+             } else {
+             return $q.reject('Username/Pasword inválido');
+             }
 
-          }).catch(function (err){
-              return $q.reject('Username/Pasword inválido');
-          });
-        
-      },
-      getCurrentUser: function () {
-          var def = $q.defer();
-          if(authenticatedUser) {
-            def.resolve(authenticatedUser)
-          } else {
-            def.reject();
-          }
-         return def.promise;
-      },
-      logout: function () {
-        
-        var deferred = $q.defer();
-        authenticatedUser = null;
-        deferred.resolve();
-        return deferred.promise;
-      }
+             }).catch(function (err) {
+             return $q.reject('Username/Pasword inválido');
+             });
 
-    };
-  }
+             },*/
+            login: function (data) {
+                return $http.post('/auth', {
+                    username: data.username,
+                    password: data.password
+                }).then(function (response) {
+                    debugger;
+                        localStorageService.set('id_token', response.data.token);
+                        return userService.loadUser(data.username)
+                            .then(function (userFound) {
+                                authenticatedUser = userFound;
+                                return $q.resolve();
+                            });
+                }).catch(function (response) {
+                    return $q.reject("Usuario/Contraseña inválido");
+                });
+            },
+            getCurrentUser: function () {
+                var def = $q.defer();
+                if (authenticatedUser) {
+                    def.resolve(authenticatedUser)
+                } else {
+                    def.reject();
+                }
+                return def.promise;
+            },
+            logout: function () {
+                var deferred = $q.defer();
+                authenticatedUser = null;
+                localStorageService.remove('id_token');
+                deferred.resolve();
+                return deferred.promise;
+            },
+            getToken: function () {
+                return localStorageService.get('id_token');
+            }
+
+        };
+    }
 
 })();

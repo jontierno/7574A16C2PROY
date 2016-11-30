@@ -3,11 +3,11 @@ angular
     .config(function ($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider, $httpProvider, jwtOptionsProvider) {
 
         jwtOptionsProvider.config({
-            tokenGetter: [function (options) {
+            tokenGetter: ['authService',function (authService, options) {
                 if (options && options.url.substr(options.url.length - 5) == '.html') {
                     return null;
                 }
-                return localStorage.getItem('id_token');
+                return authService.getToken();
             }],
             unauthenticatedRedirector: ['$state', function ($state) {
                 $state.go('login');
