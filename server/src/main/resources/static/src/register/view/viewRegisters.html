@@ -1,0 +1,16 @@
+
+   <div class="container">
+    <md-toolbar layout="row" class="md-primary container-haeder">
+      <div class="md-toolbar-tools">
+        <span>Inscripciones</span>
+      </div>
+    </md-toolbar>
+    <div layout-margin layout-padding layout-gt-sm="row">
+          <div ng-class="regCtrl.defineStyle(s)" layout-padding ng-repeat="s in regCtrl.selectedCourses" class="course">
+            <course-view flex course="s"></course-view>
+          </div>
+    </div>
+    <div layout-gt-sm="row" layout-align="center center" ng-hide="regCtrl.selectedCourses.length > 0">
+        <h2 class="md-display-1">No está inscripto a ninguna materia</h2>
+    </div>
+  </div>

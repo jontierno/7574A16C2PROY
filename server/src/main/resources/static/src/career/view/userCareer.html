@@ -1,0 +1,13 @@
+   <div class="container">
+    <md-toolbar layout="row" class="md-hue-3 container-haeder">
+      <div class="md-toolbar-tools">
+        <span>{{userCareer.career.code + '- ' + userCareer.career.description}}</span>
+      </div>
+    </md-toolbar>
+    <div layout-padding>
+    	<span class="md-title">Materias</span>
+    	<div ng-repeat="s in userCareer.career.subjects">
+			{{s.code + "- "+ s.description}}    			
+    	</div>
+    </div>
+    </div>

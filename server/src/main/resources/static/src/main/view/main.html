@@ -1,0 +1,32 @@
+    <md-toolbar flex layout="row">
+      <md-button class="menu" hide-gt-sm ng-click="main.toggleMenu()" aria-label="Show Menu">
+        <md-icon aria-label="Menu" class="material-icons">menu</md-icon>
+      </md-button>
+      <div flex="90" layout="column" layout-align="center start">
+        <h1 flex-offset-gt-sm="10">FiubaApp</h1>
+      </div>
+      <div flex="90" id="app-user" hide-xs layout="row" layout-align="end center"> 
+          <h1>{{currentUser.name}}</h1>
+          <md-button class="menu" ng-click="main.exit()" aria-label="Show Menu">
+            <md-icon aria-label="Menu" class="material-icons">exit_to_app</md-icon>
+          </md-button>
+      </div>
+    </md-toolbar>
+
+    <div flex layout="row">
+        <md-sidenav  ng-click="main.toggleMenu()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
+          <md-list>
+            <md-list-item ng-repeat="it in main.menues">
+                <md-button ng-click="main.navigate(it)">
+                   <md-icon aria-label="Menu" class="material-icons md-48 avatar">{{it.avatar}}</md-icon>
+                  {{it.name}}
+                </md-button>
+            </md-list-item>
+          </md-list>
+        </md-sidenav>
+
+        <div flex id="content" ui-view>
+
+        </div>
+
+    </div>

@@ -1,0 +1,35 @@
+   <div layout-margin>
+   <div class="container">
+    <md-toolbar layout="row" class="md-primary container-haeder">
+      <div class="md-toolbar-tools">
+        <span>Materias</span>
+      </div>
+    </md-toolbar>
+    <div class="subject-container" layout-margin layout-padding layout-gt-sm="row">
+      <div ng-click="regCtrl.selectSubject(s)" ng-class="{selected: s.selected}" md-colors="{color: 'red-A100', border-color: 'primary-600'}"
+      class="subject" ng-repeat="s in regCtrl.career.subjects">
+        {{s.code + "- "+ s.description}}          
+      </div>
+    </div>
+  </div>
+  <div  ng-show="regCtrl.selectedSubject"class="container">
+    <md-toolbar layout="row" class="md-hue-3 container-haeder">
+      <div class="md-toolbar-tools">
+        <span>Cursos: {{regCtrl.selectedSubject.description}}</span>
+      </div>
+    </md-toolbar>
+    <div layout-margin layout-padding layout-gt-sm="row">
+          <div ng-class="regCtrl.defineStyle(s)" flex-gt-sm="50" layout-padding ng-repeat="s in regCtrl.selectedCourses" class="course">
+            <course-view  course="s"></course-view>
+            <div layout="row" layout-align="end center"> 
+                <md-button ng-hide="regCtrl.anySelected" ng-click="regCtrl.selectCourse(s)" class="md-raised md-primary">
+                  Inscribir
+                </md-button>
+                <md-button ng-show= "s.selected"  ng-click="regCtrl.deleteCourse(s)"  class="md-raised md-warn">
+                  <md-icon aria-label="Delete" class="material-icons">delete_forever</md-icon>
+                </md-button> 
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
