@@ -25,12 +25,12 @@
              });
 
              },*/
+
             login: function (data) {
                 return $http.post('/auth', {
                     username: data.username,
                     password: data.password
                 }).then(function (response) {
-                    debugger;
                         localStorageService.set('id_token', response.data.token);
                         return userService.loadUser(data.username)
                             .then(function (userFound) {

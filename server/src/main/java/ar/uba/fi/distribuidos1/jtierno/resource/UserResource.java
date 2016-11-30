@@ -2,6 +2,7 @@ package ar.uba.fi.distribuidos1.jtierno.resource;
 
 import ar.uba.fi.distribuidos1.jtierno.model.User;
 import ar.uba.fi.distribuidos1.jtierno.security.JwtUser;
+import ar.uba.fi.distribuidos1.jtierno.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,22 +23,14 @@ public class UserResource {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userService;
 
-    @RequestMapping("/greeting")
-    public User greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        User user = new User();
-        user.setId(counter.incrementAndGet());
-        user.setFirstName(String.format(template, name));
-        return user;
-
-    }
 
     @RequestMapping(value = "user", method = RequestMethod.GET)
-    public JwtUser getAuthenticatedUser(HttpServletRequest request) {
+    public User getAuthenticatedUser(HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username
-        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(name);
+        User user=userService.getUser(name);
         return user;
     }
 }

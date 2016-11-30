@@ -1,23 +1,24 @@
 package ar.uba.fi.distribuidos1.jtierno.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by jonathan on 29/11/16.
  */
 @Entity
+@Table(name= "SYSTEM_USER")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String userName;
     private String firstName;
     private String lastName;
+
     @Transient
-    private List<Career> carrers;
+    private Career career;
     @Transient
     private Set<Course> courses;
 
@@ -29,12 +30,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -53,12 +54,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Career> getCarrers() {
-        return carrers;
+    public Career getCareer() {
+        return career;
     }
 
-    public void setCarrers(List<Career> carrers) {
-        this.carrers = carrers;
+    public void setCareer(Career career) {
+        this.career = career;
     }
 
     public Set<Course> getCourses() {
