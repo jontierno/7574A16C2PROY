@@ -1,6 +1,6 @@
 angular
-    .module('fiubaApp', ['ngMaterial','ui.router','login','auth', 'career', 'register', 'main', 'LocalStorageModule','angular-jwt'])
-    .config(function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider,authManager){
+    .module('fiubaApp', ['ngMaterial','ui.router','login','auth', 'career', 'register', 'main', 'LocalStorageModule'])
+    .config(function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider){
 
      //   $mdIconProvider
       //      .defaultIconSet("./assets/svg/avatars.svg", 128)
@@ -27,7 +27,8 @@ angular
           templateUrl: "src/main/view/main.html",
           controller: 'MainController as main',
           abstract: true,
-          /*resolve: {
+          resolve: {
+
                 // A string value resolves to a service
                 authService: 'authService',
 
@@ -44,9 +45,6 @@ angular
 
                     return defer.promise;
                 }
-            }*/
-            data: {
-                requiresLogin: true
             }
         })
         .state('app.wellcome', {
@@ -70,25 +68,6 @@ angular
           url: "/viewregisters",
           templateUrl: "src/register/view/viewRegisters.html",
           controller: 'ViewRegistersController as regCtrl'
-        });
+        }); ; 
 
-        authManager.checkAuthOnRefresh();
-        authManager.redirectWhenUnauthenticated();
-    })
-    .config(function Config($httpProvider, jwtOptionsProvider) {
-        // Please note we're annotating the function so that the $injector works when the file is minified
-        jwtOptionsProvider.config({
-            tokenGetter: ['myService', function(myService) {
-                if (options && options.url.substr(options.url.length - 5) == '.html') {
-                    return null;
-                }
-                return localStorage.getItem('id_token');
-            }],
-            authPrefix: '',
-            unauthenticatedRedirector: ['$state', function($state) {
-                $state.go('login');
-            }]
-        });
-
-        $httpProvider.interceptors.push('jwtInterceptor');
     });
