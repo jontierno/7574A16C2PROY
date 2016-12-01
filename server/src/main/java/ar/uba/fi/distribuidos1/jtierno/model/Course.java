@@ -20,6 +20,9 @@ public class Course {
 
     private Long vacancies;
 
+    private String professors;
+
+
     public String getCode() {
         return code;
     }
@@ -51,4 +54,13 @@ public class Course {
     public void setVacancies(Long vacancies) {
         this.vacancies = vacancies;
     }
+
+    public String getProfessors() {
+        return professors;
+    }
+
+    public void setProfessors(String professors) {
+        this.professors = professors;
+    }
+
 }

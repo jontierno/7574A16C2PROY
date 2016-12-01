@@ -14,6 +14,7 @@ public class Class {
     private String day;
     private String startingTime;
     private String endingTime;
+    private String place;
     @ManyToOne(fetch=FetchType.LAZY)
     private Course course;
     public Long getId() {
@@ -62,5 +63,13 @@ public class Class {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 }

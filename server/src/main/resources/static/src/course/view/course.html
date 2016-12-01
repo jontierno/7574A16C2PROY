@@ -12,13 +12,13 @@
               <h3 class="md-subtitle">Horarios</h3>
               <div class="class" layout="column" layout-margin>
                   <span ng-repeat="p in course.classes">
-                      {{p.day + "(" + p.type + ")"+ ": " + p.from +"-" + p.to}}  
+                      {{p.day + "(" + p.type + ")"+ ": " + p.from +"-" + p.to + " " + p.place}}
                   </span>
               </div>
             </div> 
             <md-divider ng-if="!$last"></md-divider>
             <div layout="row">
               <h3  flex class="md-subtitle">Vacantes</h3>
-              <h3 flex class="md-subtitle"> {{course.vacancy}}</h3>
+              <h3 flex class="md-subtitle"> {{course.vacancies}}</h3>
             </div> 
       </div>
