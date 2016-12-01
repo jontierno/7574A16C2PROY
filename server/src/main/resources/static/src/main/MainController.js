@@ -9,7 +9,6 @@
 
   function MainController( mainService,authService, $mdSidenav, $mdBottomSheet, $timeout, $log, $state,$scope ) {
     var self = this;
-
     self.menues        = [ ];
     self.toggleMenu   = toggleMenu;
     self.navigate = navigate;

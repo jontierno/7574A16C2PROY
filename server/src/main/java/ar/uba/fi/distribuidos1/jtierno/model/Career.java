@@ -1,5 +1,7 @@
 package ar.uba.fi.distribuidos1.jtierno.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class Career {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public List<Subject> getSubjects() {
         return subjects;

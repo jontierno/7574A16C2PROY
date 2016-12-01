@@ -9,9 +9,7 @@
     // Promise-based API
     return {
       loadCareer : function(code) {
-
           return $http.get("/career/" + code).then(function (response) {
-                    debugger;
                     return $q.resolve(response.data);
           });
       }
