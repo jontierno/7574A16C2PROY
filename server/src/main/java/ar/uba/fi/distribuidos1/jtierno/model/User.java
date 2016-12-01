@@ -17,8 +17,9 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @Transient
+    @ManyToOne
     private Career career;
+
     @Transient
     private Set<Course> courses;
 

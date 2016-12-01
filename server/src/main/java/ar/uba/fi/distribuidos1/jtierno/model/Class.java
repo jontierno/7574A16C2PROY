@@ -9,13 +9,11 @@ import javax.persistence.*;
 public class Class {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String type;
     private String day;
-    private String startingDate;
-    private String endingDate;
-    private Integer vacancies;
+    private String startingTime;
+    private String endingTime;
     @ManyToOne(fetch=FetchType.LAZY)
     private Course course;
     public Long getId() {
@@ -42,28 +40,20 @@ public class Class {
         this.day = day;
     }
 
-    public String getStartingDate() {
-        return startingDate;
+    public String getStartingTime() {
+        return startingTime;
     }
 
-    public void setStartingDate(String startingDate) {
-        this.startingDate = startingDate;
+    public void setStartingTime(String startingTime) {
+        this.startingTime = startingTime;
     }
 
-    public String getEndingDate() {
-        return endingDate;
+    public String getEndingTime() {
+        return endingTime;
     }
 
-    public void setEndingDate(String endingDate) {
-        this.endingDate = endingDate;
-    }
-
-    public Integer getVacancies() {
-        return vacancies;
-    }
-
-    public void setVacancies(Integer vacancies) {
-        this.vacancies = vacancies;
+    public void setEndingTime(String endingTime) {
+        this.endingTime = endingTime;
     }
 
     public Course getCourse() {

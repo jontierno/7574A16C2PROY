@@ -10,10 +10,9 @@ import java.util.List;
 public class Subject {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private String code;
-    private String name;
 
+    private String name;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private List<Course> courses;
 
@@ -23,5 +22,21 @@ public class Subject {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

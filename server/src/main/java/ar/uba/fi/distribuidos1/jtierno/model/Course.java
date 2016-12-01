@@ -10,14 +10,15 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private String code;
 
     @OneToMany(mappedBy = "course")
     private List<Class> classes;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Subject subject;
+
+    private Long vacancies;
 
     public String getCode() {
         return code;
@@ -41,5 +42,13 @@ public class Course {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public Long getVacancies() {
+        return vacancies;
+    }
+
+    public void setVacancies(Long vacancies) {
+        this.vacancies = vacancies;
     }
 }
