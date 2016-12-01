@@ -3,20 +3,22 @@
   angular
        .module('register')
        .controller('RegisterController', [
-          'registerService', 'careerService', 'courseService', '$log', '$state','$scope',
+          'registerService', 'careerService', 'courseService', '$log', '$state','$scope','authService',
           RegisterController
        ]);
 
-  function RegisterController ( registerService, careerService, courseService, $log, $state,$scope ) {
+  function RegisterController ( registerService, careerService, courseService, $log, $state,$scope, authService ) {
     var self = this;
     
     self.selectSubject = selectSubject;
     self.defineStyle = defineStyle;
     self.selectCourse = selectCourse;
     self.deleteCourse = deleteCourse;
-    careerService.loadCareer($scope.currentUser.career).then(function(career){
-    	self.career= career;
-    })
+    authService.getCurrentUser().then(function (user) {
+        return careerService.loadCareer(user.career).then(function(career){
+            self.career= career;
+        })
+    });
 
     function selectSubject(subject) {
       self.anySelected = false;

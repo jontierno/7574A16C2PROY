@@ -7,7 +7,7 @@
     </md-toolbar>
     <div class="subject-container" layout-margin layout-padding layout-gt-sm="row">
       <div ng-click="regCtrl.selectSubject(s)" ng-class="{selected: s.selected}" md-colors="{color: 'red-A100', border-color: 'primary-600'}"
-      class="subject" ng-repeat="s in regCtrl.career.subjects">
+      class="subject" ng-repeat="s in regCtrl.career.subjects | orderBy:'code'">
         {{s.code + "- "+ s.description}}          
       </div>
     </div>
