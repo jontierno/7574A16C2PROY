@@ -1,6 +1,7 @@
 package ar.uba.fi.distribuidos1.jtierno.resource;
 
 import ar.uba.fi.distribuidos1.jtierno.model.User;
+import ar.uba.fi.distribuidos1.jtierno.resource.transfer.UserDTO;
 import ar.uba.fi.distribuidos1.jtierno.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,10 +25,11 @@ public class UserResource {
 
 
     @RequestMapping(value = "user", method = RequestMethod.GET)
-    public User getAuthenticatedUser(HttpServletRequest request) {
+    public UserDTO getAuthenticatedUser(HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username
         User user=userService.getUser(name);
-        return user;
+
+        return new UserDTO(user.getUserName(),user.getFirstName(), user.getLastName(),user.getCareer().getCode());
     }
 }
