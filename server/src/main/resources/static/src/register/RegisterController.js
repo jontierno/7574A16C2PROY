@@ -21,7 +21,7 @@
     });
 
     function selectSubject(subject) {
-      self.anySelected = false;
+      self.anySelected = true;
       if(self.selectedSubject){
         self.selectedSubject.selected=false;
       }
@@ -29,9 +29,11 @@
       self.selectedSubject.selected = true;
       courseService.getCourses(subject.code).then(function(courses){
             registerService.markSelecteds($scope.currentUser, courses).then(function(value){
+                var anySelected = false;
                 for(var i in courses) {
-                  self.anySelected = self.anySelected || courses[i].selected;
+                  anySelected = self.anySelected || courses[i].selected;
                 }
+                self.anySelected = anySelected;
                 self.selectedCourses = courses;
             });
         });

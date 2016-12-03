@@ -1,6 +1,8 @@
 package ar.uba.fi.distribuidos1.jtierno.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -13,15 +15,17 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String userName;
+
     private String firstName;
     private String lastName;
 
     @ManyToOne
     private Career career;
 
-    @Transient
-    private Set<Course> courses;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Set<Registration> registrations;
 
     public Long getId() {
         return id;
@@ -63,11 +67,38 @@ public class User {
         this.career = career;
     }
 
-    public Set<Course> getCourses() {
-        return courses;
+    public Set<Registration> getRegistrations() {
+        if(registrations == null){
+            registrations = new HashSet<Registration>();
+        }
+        return registrations;
     }
 
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+    public void setRegistrations(Set<Registration> registrations) {
+        this.registrations = registrations;
+    }
+
+
+    public void register(Course course) {
+        Registration registration = course.register(this);
+        Set<Registration> registrations = this.getRegistrations();
+        if(registrations.contains(registration)) {
+            course.unregistration(this);
+            throw new UserAlreadyRegistered();
+        } else {
+            registrations.add(registration);
+        }
+
+    }
+
+    public void unregister(Course course) {
+        Set<Registration> registrations = this.getRegistrations();
+        Optional<Registration> first = registrations.stream().filter((s) -> s.getCourse().equals(course)).findFirst();
+        if(first.isPresent()) {
+            registrations.remove(first.get());
+            course.unregistration(this);
+        } else {
+            throw new UserIsNotRegistered();
+        }
     }
 }

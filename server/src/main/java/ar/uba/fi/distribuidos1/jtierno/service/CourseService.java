@@ -19,4 +19,5 @@ public class CourseService {
     public List<Course> getCoursesBySubject(String subject){
             return courseRepository.findBySubjectCode(subject);
     }
+
 }

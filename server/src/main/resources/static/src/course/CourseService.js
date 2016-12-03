@@ -24,12 +24,9 @@
         return $q.reject("Course not found");
       },
       register: function (course) {
-          for(var i in courses) {
-            if(courses[i].subject == course.subject && courses[i].code == course.code) {
-              courses[i].vacancy = courses[i].vacancy -1;
-              localStorageService.set("courses", courses);
-            }
-        }
+          debugger;
+          return $http.put("/register/" + course.code);
+
       },
       unregister: function (course) {
           for(var i in courses) {

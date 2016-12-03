@@ -1,6 +1,7 @@
 package ar.uba.fi.distribuidos1.jtierno.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,4 +64,15 @@ public class Course {
         this.professors = professors;
     }
 
+    public Registration register(User user) {
+        if(vacancies > 0) {
+            vacancies--;
+            return new Registration(user, this, new Date());
+        } else {
+            throw new OutOfVacancyException();
+        }
+    }
+    public void unregistration(User user){
+        vacancies++;
+    }
 }
