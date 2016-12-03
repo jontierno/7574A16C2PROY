@@ -1,7 +1,10 @@
 package ar.uba.fi.distribuidos1.jtierno.resource;
 
+import ar.uba.fi.distribuidos1.jtierno.model.Course;
 import ar.uba.fi.distribuidos1.jtierno.model.Registration;
 import ar.uba.fi.distribuidos1.jtierno.model.User;
+import ar.uba.fi.distribuidos1.jtierno.resource.transfer.ClassDTO;
+import ar.uba.fi.distribuidos1.jtierno.resource.transfer.CourseDTO;
 import ar.uba.fi.distribuidos1.jtierno.resource.transfer.RegistrationRequest;
 import ar.uba.fi.distribuidos1.jtierno.resource.transfer.UserDTO;
 import ar.uba.fi.distribuidos1.jtierno.service.UserService;
@@ -57,5 +60,19 @@ public class UserResource {
         User user=userService.getUser(name);
         Set<Registration> registrations = user.getRegistrations();
         return registrations.stream().map((s)-> s.getCourse().getCode()).collect(Collectors.toList());
+    }
+    @GetMapping(value = "user/courses")
+    public List<CourseDTO> getCourses (){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        List<Course> courses =userService.getUserCourses(name);
+
+        return courses.stream().map(
+                (c) -> new CourseDTO(c.getCode(), c.getVacancies(), c.getProfessors().split("-"),
+                        c.getClasses().stream().map((cl) -> new ClassDTO(cl.getStartingTime(),
+                                cl.getEndingTime(), cl.getType(),
+                                cl.getDay(), cl.getPlace()))
+                                .collect(Collectors.toList())))
+                .collect(Collectors.toList());
     }
 }

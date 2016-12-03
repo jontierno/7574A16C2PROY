@@ -14,14 +14,10 @@
               return $q.resolve(response.data);
           });
       },
-      getCourse: function (subject, code) {
-        for(var i in courses) {
-            if(courses[i].subject == subject && courses[i].code == code) {
-              return $q.when(angular.copy(courses[i]));
-            }
-        }
-        
-        return $q.reject("Course not found");
+      getUserCourses: function () {
+          return $http.get("/user/courses").then(function (response) {
+              return $q.resolve(response.data);
+          });
       },
       register: function (course) {
           debugger;

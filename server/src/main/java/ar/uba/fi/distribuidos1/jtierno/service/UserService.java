@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by jonathan on 30/11/16.
@@ -31,9 +33,6 @@ public class UserService {
         User user = userRepository.getByUserName(username);
         Course course = courseRepository.getOne(courseCode);
         user.register(course);
-        //userRepository.saveAndFlush(user);
-        //courseRepository.saveAndFlush(course);
-
     }
 
     @Transactional
@@ -41,6 +40,12 @@ public class UserService {
         User user = userRepository.getByUserName(username);
         Course course = courseRepository.getOne(courseCode);
         user.unregister(course);
+
+    }
+
+    public List<Course> getUserCourses(String name) {
+        User user = userRepository.getByUserName(name);
+        return user.getRegistrations().stream().map(s -> s.getCourse()).collect(Collectors.toList());
 
     }
 }
