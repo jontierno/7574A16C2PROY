@@ -21,7 +21,7 @@
     });
 
     function selectSubject(subject) {
-      self.anySelected = false;
+
       if(self.selectedSubject){
         self.selectedSubject.selected=false;
       }
@@ -51,13 +51,14 @@
     }
 
     function selectCourse(course) {
-        
+        self.anySelected = false;
         registerService.register($scope.currentUser, course).then(function(){
            self.selectSubject(self.selectedSubject);
         })
     }
 
     function deleteCourse ( course) {
+        this.anySelected = true;
         registerService.unregister($scope.currentUser, course).then (function(){
             self.selectSubject(self.selectedSubject);
 

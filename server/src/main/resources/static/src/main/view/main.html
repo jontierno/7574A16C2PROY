@@ -6,7 +6,7 @@
         <h1 flex-offset-gt-sm="10">FiubaApp</h1>
       </div>
       <div flex="90" id="app-user" hide-xs layout="row" layout-align="end center"> 
-          <h1>{{currentUser.name}}</h1>
+          <h1>{{currentUser.firstName + " " + currentUser.lastName+  " (" + currentUser.userName+")"  }} </h1>
           <md-button class="menu" ng-click="main.exit()" aria-label="Show Menu">
             <md-icon aria-label="Menu" class="material-icons">exit_to_app</md-icon>
           </md-button>
