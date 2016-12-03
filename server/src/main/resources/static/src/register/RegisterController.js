@@ -28,13 +28,13 @@
       self.selectedSubject = subject;
       self.selectedSubject.selected = true;
       courseService.getCourses(subject.code).then(function(courses){
-            registerService.markSelecteds($scope.currentUser, courses).then(function(value){
+            registerService.markSelecteds($scope.currentUser, courses).then(function(procourses){
                 var anySelected = false;
-                for(var i in courses) {
-                  anySelected = self.anySelected || courses[i].selected;
+                for(var i in procourses) {
+                  anySelected = anySelected || procourses[i].selected;
                 }
                 self.anySelected = anySelected;
-                self.selectedCourses = courses;
+                self.selectedCourses = procourses;
             });
         });
 

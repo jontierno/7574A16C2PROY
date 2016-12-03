@@ -1,32 +1,35 @@
-(function(){
-  'use strict';
+(function () {
+    'use strict';
 
-  angular.module('register')
-         .service('registerService', ['$q', '$http','userService','courseService', RegisterService]);
+    angular.module('register')
+        .service('registerService', ['$q', '$http', 'userService', 'courseService', RegisterService]);
 
-  function RegisterService($q,$http, userService, courseService){
-  
-    return {
-      markSelecteds : function(user, courses) {
-        return $http.get("/registration").then(function (response) {
-          var registrations = response.data;
-            for (var i in registrations){
-                for(var j in courses) {
-                    if(registrations[i] == courses[j].code) {
-                        courses[j].selected = true;
-                        break;
+    function RegisterService($q, $http, userService, courseService) {
+
+        return {
+            markSelecteds: function (user, courses) {
+                return $http.get("/registration").then(function (response) {
+                    var registrations = response.data;
+
+                    for (var j in courses) {
+                        if (registrations.indexOf(courses[j].code) > -1) {
+                            courses[j].selected = true;
+                        } else {
+                            courses[j].selected = false;
+                        }
+
                     }
-                }
+
+                    return $q.resolve(courses);
+                })
+            },
+            register: function (user, course) {
+                return $http.put("/registration", {code: course.code});
+            },
+            unregister: function (user, course) {
+                return $http.put("/unregistration", {code: course.code});
             }
-        })
-      },
-      register: function (user, course){
-            return $http.put("/registration",{code: course.code});
-      },
-      unregister: function (user, course){
-          return $http.put("/unregistration",{code: course.code});
-      }
-    };
-  }
+        };
+    }
 
 })();
