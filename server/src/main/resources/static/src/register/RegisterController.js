@@ -21,11 +21,11 @@
     });
 
     function selectSubject(subject) {
-      self.anySelected = true;
+      self.anySelected = false;
       if(self.selectedSubject){
         self.selectedSubject.selected=false;
       }
-    	self.selectedSubject = subject;
+      self.selectedSubject = subject;
       self.selectedSubject.selected = true;
       courseService.getCourses(subject.code).then(function(courses){
             registerService.markSelecteds($scope.currentUser, courses).then(function(value){

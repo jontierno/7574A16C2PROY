@@ -24,7 +24,7 @@ public class User {
     @ManyToOne
     private Career career;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval =true)
     private Set<Registration> registrations;
 
     public Long getId() {

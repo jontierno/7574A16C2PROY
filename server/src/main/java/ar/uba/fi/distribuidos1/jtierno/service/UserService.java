@@ -36,11 +36,11 @@ public class UserService {
 
     }
 
+    @Transactional
     public void unregister(String username, String courseCode) {
         User user = userRepository.getByUserName(username);
         Course course = courseRepository.getOne(courseCode);
         user.unregister(course);
-        userRepository.saveAndFlush(user);
-        courseRepository.saveAndFlush(course);
+
     }
 }

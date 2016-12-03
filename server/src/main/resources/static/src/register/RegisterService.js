@@ -24,7 +24,7 @@
             return $http.put("/registration",{code: course.code});
       },
       unregister: function (user, course){
-          return $http.delete("/registration",{code: course.code});
+          return $http.put("/unregistration",{code: course.code});
       }
     };
   }

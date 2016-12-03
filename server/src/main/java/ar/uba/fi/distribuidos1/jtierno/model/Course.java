@@ -75,4 +75,5 @@ public class Course {
     public void unregistration(User user){
         vacancies++;
     }
+
 }
