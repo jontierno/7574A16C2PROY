@@ -44,6 +44,7 @@
     function defineStyle(course) {
 
       if(course.selected) return "selected";
+      if(course.vacancies == 0) return 'disabled';
       if(!self.anySelected) return "";
       if(!course.selected) {} return 'disabled';
       return 'enabled'

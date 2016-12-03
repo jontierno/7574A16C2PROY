@@ -22,7 +22,7 @@
           <div ng-class="regCtrl.defineStyle(s)" flex-gt-sm="50" layout-padding ng-repeat="s in regCtrl.selectedCourses" class="course">
             <course-view  course="s"></course-view>
             <div layout="row" layout-align="end center"> 
-                <md-button ng-hide="regCtrl.anySelected" ng-click="regCtrl.selectCourse(s)" class="md-raised md-primary">
+                <md-button ng-hide="regCtrl.anySelected || s.vacancies == 0" ng-click="regCtrl.selectCourse(s)" class="md-raised md-primary">
                   Inscribir
                 </md-button>
                 <md-button ng-show= "s.selected"  ng-click="regCtrl.deleteCourse(s)"  class="md-raised md-warn">
