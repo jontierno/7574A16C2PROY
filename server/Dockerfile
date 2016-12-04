@@ -4,16 +4,11 @@
 ######################################################
 
 # Imagen Ubuntu oficial versión 14.04
-FROM ubuntu:16.04
+FROM java:oracle-java8
 
 MAINTAINER jtierno jtierno
 
 COPY ./ /home
-
-#INSTALACION JAVA
-RUN add-apt-repository ppa:webupd8team/java -y \
-            && apt-get update \
-            && apt-get install oracle-java8-installer
 
 #PREPARACION DE LA APLICACION
 RUN cd /home && chmod 777 gradlew \
