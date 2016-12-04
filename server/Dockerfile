@@ -1,7 +1,7 @@
-####################################################
-## Dockerfile para el uso del Application Server  ##
-## Basado en Ubuntu 15.10              		  ##
-####################################################
+######################################################
+## Dockerfile para el uso del Servidor de registros ##
+## Basado en Ubuntu 16.04              		        ##
+######################################################
 
 # Imagen Ubuntu oficial versión 14.04
 FROM ubuntu:16.04
@@ -9,8 +9,7 @@ FROM ubuntu:16.04
 MAINTAINER jtierno jtierno
 
 COPY ./ /home
-RUN ls /home
-RUN cd /home/server && chmod 777 gradlew
-RUN cd /home/server && ./gradlew bootRun &
+RUN cd /home && chmod 777 gradlew
+RUN cd /home && ./gradlew bootRun &
 CMD ["bash"]
 EXPOSE 9000
