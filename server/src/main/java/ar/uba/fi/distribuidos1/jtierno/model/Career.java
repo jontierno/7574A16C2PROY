@@ -18,7 +18,8 @@ public class Career {
     @ManyToMany
     @JoinTable(name = "career_subject",
             joinColumns = @JoinColumn(name = "career_code", referencedColumnName = "code"),
-            inverseJoinColumns = @JoinColumn(name = "subject_code", referencedColumnName = "code"))
+            inverseJoinColumns = @JoinColumn(name = "subject_code", referencedColumnName = "code"),
+            indexes = {@Index(name="idx_career_subject_sub", columnList = "subject_code"),@Index(name="idx_career_subject_car", columnList= "career_code")})
     private List<Subject> subjects;
 
     public String getCode() {

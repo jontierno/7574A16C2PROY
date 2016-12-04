@@ -8,6 +8,7 @@ import java.util.Date;
  * Created by jonathan on 01/12/16.
  */
 @Entity
+@Table(indexes = @Index(name="idx_reg_id", columnList = "user_id"))
 public class Registration {
 
     @Embeddable

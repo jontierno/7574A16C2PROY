@@ -7,6 +7,7 @@ import java.util.List;
  * Created by jonathan on 29/11/16.
  */
 @Entity
+
 public class Subject {
 
     @Id

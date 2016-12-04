@@ -8,6 +8,7 @@ import java.util.List;
  * Created by jonathan on 29/11/16.
  */
 @Entity
+@Table(indexes = @Index(name="idx_course_subject", columnList = "subject_code"))
 public class Course {
 
     @Id

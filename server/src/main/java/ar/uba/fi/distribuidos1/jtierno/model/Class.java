@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Created by jonathan on 30/11/16.
  */
 @Entity
+@Table(indexes = @Index(name="idx_class_course", columnList = "course_code"))
 public class Class {
 
     @Id
