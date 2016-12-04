@@ -9,7 +9,16 @@ FROM ubuntu:16.04
 MAINTAINER jtierno jtierno
 
 COPY ./ /home
-RUN cd /home && chmod 777 gradlew
-RUN cd /home/daemon && chmod 777 send-statics.sh
+
+#INSTALACION JAVA
+RUN sudo add-apt-repository ppa:webupd8team/java \
+            && sudo apt-get update \
+            && sudo apt-get install oracle-java8-installer
+
+#PREPARACION DE LA APLICACION
+RUN cd /home && chmod 777 gradlew \
+             && chmod 777 daemon/send-statics.sh \
+             && 
+
 CMD ["bash"]
 EXPOSE 9000
