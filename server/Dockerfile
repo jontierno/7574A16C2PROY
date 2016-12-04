@@ -18,7 +18,6 @@ RUN add-apt-repository ppa:webupd8team/java \
 #PREPARACION DE LA APLICACION
 RUN cd /home && chmod 777 gradlew \
              && chmod 777 daemon/send-statics.sh \
-             &&
 
 CMD ["bash"]
 EXPOSE 9000
