@@ -20,7 +20,7 @@ RUN apt-get update && \
     apt-get install -y oracle-java8-installer && \
     apt-get clean
 
-ENV JAVA_HOME /usr/lib/jvm/open-jdk
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/
 
 #PREPARACION DE LA APLICACION
 RUN cd /home && chmod 777 gradlew \
