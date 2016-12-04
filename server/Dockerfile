@@ -26,7 +26,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/
 RUN cd /home && chmod 777 gradlew \
              && chmod 777 daemon/send-statics.sh
 
-RUN cd /home && chmod 777 gradlew && ./gradlew build -x test
+RUN cd /home && chmod 777 gradlew && ./gradlew assemble
 
 CMD ["bash"]
 EXPOSE 9000
