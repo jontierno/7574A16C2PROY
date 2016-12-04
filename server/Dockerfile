@@ -11,14 +11,14 @@ MAINTAINER jtierno jtierno
 COPY ./ /home
 
 #INSTALACION JAVA
-RUN sudo add-apt-repository ppa:webupd8team/java \
-            && sudo apt-get update \
-            && sudo apt-get install oracle-java8-installer
+RUN add-apt-repository ppa:webupd8team/java \
+            && apt-get update \
+            && apt-get install oracle-java8-installer
 
 #PREPARACION DE LA APLICACION
 RUN cd /home && chmod 777 gradlew \
              && chmod 777 daemon/send-statics.sh \
-             && 
+             &&
 
 CMD ["bash"]
 EXPOSE 9000
