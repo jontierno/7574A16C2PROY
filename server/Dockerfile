@@ -4,7 +4,7 @@
 ######################################################
 
 # Imagen Ubuntu oficial versión 14.04
-FROM java:oracle-java8
+FROM openjdk:8-jdk-alpine
 
 MAINTAINER jtierno jtierno
 
