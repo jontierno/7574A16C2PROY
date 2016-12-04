@@ -20,9 +20,12 @@ COPY ./ /home
 #    apt-get install -y oracle-java8-installer && \
 #    apt-get clean
 
+ENV JAVA_HOME /usr/lib/jvm/open-jdk
+
 #PREPARACION DE LA APLICACION
 RUN cd /home && chmod 777 gradlew \
-             && chmod 777 daemon/send-statics.sh
+             && chmod 777 daemon/send-statics.sh \
+             && ./gradlew build
 
 CMD ["bash"]
 EXPOSE 9000
