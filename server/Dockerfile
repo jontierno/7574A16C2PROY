@@ -10,6 +10,6 @@ MAINTAINER jtierno jtierno
 
 COPY ./ /home
 RUN cd /home && chmod 777 gradlew
-RUN cd /home && ./gradlew bootRun &
+RUN cd /home/daemon && chmod 777 send-statics.sh
 CMD ["bash"]
 EXPOSE 9000
