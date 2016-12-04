@@ -9,7 +9,7 @@ FROM ubuntu:16.04
 MAINTAINER jtierno jtierno
 
 COPY ./ /home
-
+RUN ls /home
 RUN cd /home/server && chmod 777 gradlew
 RUN cd /home/server && ./gradlew bootRun &
 CMD ["bash"]
