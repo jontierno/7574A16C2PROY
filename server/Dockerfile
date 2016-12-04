@@ -26,7 +26,7 @@ ENV JAVA_HOME /usr/lib/jvm/open-jdk
 RUN cd /home && chmod 777 gradlew \
              && chmod 777 daemon/send-statics.sh
 
-RUN cd /home && ls
+RUN cd /home && chmod 777 gradlew && ./gradlew build
 
 CMD ["bash"]
 EXPOSE 9000
