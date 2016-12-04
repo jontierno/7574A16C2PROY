@@ -11,7 +11,7 @@ MAINTAINER jtierno jtierno
 COPY ./ /home
 
 #INSTALACION JAVA
-RUN add-apt-repository ppa:webupd8team/java \
+RUN add-apt-repository ppa:webupd8team/java -y \
             && apt-get update \
             && apt-get install oracle-java8-installer
 
