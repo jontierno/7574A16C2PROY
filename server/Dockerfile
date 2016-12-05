@@ -33,4 +33,4 @@ RUN cd /home && chmod 777 gradlew \
 RUN cd /home && chmod 777 gradlew && ./gradlew assemble
 
 CMD ["bash"]
-EXPOSE 26257
+EXPOSE 9000
