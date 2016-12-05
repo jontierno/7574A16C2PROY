@@ -11,5 +11,6 @@ MAINTAINER jtierno jtierno
 COPY ./ /home
 
 CMD ["bash"]
-EXPOSE 12
+EXPOSE 8080
+EXPOSE 26257
 
