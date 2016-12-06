@@ -6,3 +6,6 @@ classes
 .idea/
 .gradle/
 *.iml
+cockriach-data
+cockroach-data
+cockroach-data/
