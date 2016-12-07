@@ -12,6 +12,7 @@ public class ProyectoApplication {
 	private static final Logger log = LoggerFactory.getLogger(ProyectoApplication.class);
 
 	public static void main(String[] args) {
+		java.security.Security.setProperty("networkaddress.cache.ttl" , "0");
 		SpringApplication.run(ProyectoApplication.class, args);
 	}
 
