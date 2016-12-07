@@ -1,23 +1,15 @@
-# Tradicional
 
-En esta implementación no hay ningun tipo de separación entre el cliente de la aplicación y el cajero, es una única aplicación monolítica.
+#Correr la imagen del load balancer
 
 
-## Build de la solución
+sudo docker run -it --name=prueba jtierno/7574a16c2proy:loadbalancer /bin/bash
 
-La construcción de este sistema se hace mediante le uso de cmake, para ello es necesario ejecutar las siguientes sentencias parado en el directorio raíz:
+Dentro ejecutar
 
-```{r, engine='bash'}
-mkdir build
-cd build
-cmake ..
-make
-```
-Una vez hecho esto ya se encuentran disponibles los ejecutables de la solución.
+```sh
 
-## Ejecución de la solución
+$ service apache2 start
+$ mosquitto -c mosquitto/mosquitto.conf &
+$ ./loadbalancer-daemon.sh
 
-```{r, engine='bash'}
-./build/tradicional 
-```
-La aplicación desplegará un menu con las operaciones disponibles.
+```sh

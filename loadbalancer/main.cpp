@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "constants.h"
-#include "cajero.h"
+
 #include "string"
 #include "vector"
 #include <stdio.h>
@@ -11,92 +11,28 @@ using namespace std;
 
 
 string handleCrearCuenta(int nro) {
-
-    int  result = crear(nro);
-    char buf[100];
-    if(result == CUENTA_YA_EXISTE) {
-        sprintf(buf,"{ \"status\": \"La cuenta %d ya existe\"}", nro);
-
-    }
-    if(result == OPERACION_SUCCESS) {
-        sprintf(buf,"{ \"saldo\": %d}", 0);
-    }
-
-    return string(buf);
+    return "";
 }
 
 
 string handleConsultarSaldo(int nro) {
-
-    int result = consultarSaldo(nro);
-    char buf[100];
-    if(result == CUENTA_INVALIDA) {
-        sprintf(buf, "{\"status\": \"La cuenta %d no existe\"}", nro);
-    }
-    if(result >= 0) {
-        sprintf(buf,"{\"saldo\": %d}", result);      
-    }
-    return string(buf);
-
+    return "";
 }
 
 
 string handleDepositar(int nro, int cant) {
-    int  result = depositar(nro, cant);
-    char buf[100];
-    if(result == CUENTA_INVALIDA) {
-        sprintf(buf, "{\"status\": \"La cuenta %d no existe\"}", nro);
-    }
-    if(result >= 0) {
-        sprintf(buf,"{\"saldo\": %d}", result);   
-    }
-    return string(buf);
+return "";
 }
 
 string handleRetirar(int nro, int cant) {
 
-    int  result = retirar(nro, cant);
-    char buf[100];
-    if(result == CUENTA_INVALIDA) {
-        sprintf(buf, "{\"status\": \"La cuenta %d no existe\"}", nro);
-    }
-
-    if(result == SALDO_INSUFICIENTE) {
-        sprintf(buf, "{\"status\": \"La cuenta %d no tiene saldo suficiente\"}", nro);
-    }
-
-    if(result >= 0) {
-        sprintf(buf,"{\"saldo\": %d}", result);   
-    }
-    return string(buf);
+return "";
 }
 
 
 string handleMovimientos(int nro) {
 
-    movimientos_t result = movimientos(nro);
-    if(result.result== CUENTA_INVALIDA) {
-        char buf[50];
-        sprintf(buf, "{\"status\": \"La cuenta %d no existe\"}", nro);
-        return string(buf);
-    }
-
-    if(result.result == OPERACION_SUCCESS) {
-
-        string res;
-        for(int i = 0; i < result.movs.size(); i++) {
-            std::string str(result.movs[i].tipo == OP_DEPOSITO ? "DEP" : "SUS");
-            if(res.length()>0){
-                res += ",";
-            }
-            char buf[50];
-            sprintf(buf,"{ \"operacion\": \"%s\", \"cantidad\":%d}",str.c_str(), result.movs[i].cantidad);
-            res += string(buf);
-        }
-        res  = "{\"movimientos\":[" +res + "]}";
-        return res;
-    }
-    return "";
+return "";
 }
 
 

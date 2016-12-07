@@ -15,5 +15,5 @@ while  IFS='' read -r line || [[ -n "$line" ]]; do
 done
 }
 
-unbuffer mosquitto_sub  -h $BROKER_URL -p $BROKER_PORT -t $TOPIC -v 2>&1 | procesar
+unbuffer mosquitto_sub  -u suscriber --pw suscriber -h $BROKER_URL -p $BROKER_PORT -t $TOPIC -v 2>&1 | procesar
 
