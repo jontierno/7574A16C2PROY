@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BROKER_URL='localhost'
+BROKER_URL=localhost
 BROKER_PORT=1883
 TOPIC='computadoras/+/carga'
 FILE='load.db'

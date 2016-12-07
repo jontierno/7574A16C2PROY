@@ -20,6 +20,9 @@ RUN apt-get update && \
     apt-get install -y nano && \
 	apt-get install -y dnsutils &&\
 	apt-get install -y iputils-ping &&\
+    apt-get install -y mosquitto &&\
+    apt-get install -y mosquitto-dev &&\
+    apt-get install -y mosquitto-clients &&\
     apt-get clean
 
 
@@ -31,7 +34,8 @@ RUN echo "networkaddress.cache.ttl=0" >> $JAVA_HOME/jre/lib/security/java.securi
 RUN cd /home && chmod 777 gradlew \
              && chmod 777 daemon/send-statics.sh
 
-RUN cd /home && chmod 777 gradlew && ./gradlew assemble
+RUN cd /home && chmod 777 gradlew
+RUN cd /home && ./gradlew assemble
 
 CMD ["bash"]
 EXPOSE 9000

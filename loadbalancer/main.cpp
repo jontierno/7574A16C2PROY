@@ -1,7 +1,5 @@
 #include <iostream>
 #include <stdlib.h>
-#include "constants.h"
-
 #include "string"
 #include "vector"
 #include <stdio.h>
@@ -9,6 +7,8 @@
 
 using namespace std;
 
+#define STATICS_FILE "statics.db"
+#define WORKERS_FILE "workers.db"
 
 string handleCrearCuenta(int nro) {
     return "";
@@ -79,63 +79,24 @@ int  main (int argc, char *argv[])
     
     int error = 1;
     string result;
-    if (op == "cuenta") {
 
-        if(method == "GET" && query != NULL) {
-            int numero;
-            sscanf(query , "%d", &numero);
-            result = handleConsultarSaldo(numero);
-            error = 0;
+
+  
+    ifstream statsFile(STATICS_FILE);
+    if (!statsFile.good()){
+        printf("Status: 500 Internal Server Error\n\n") ;
+    } else {
+        ifstream workersFile(WORKERS_FILE);
+        if(!workersFile.good()){
+            statsFile.close();
+            printf("Status: 500 Internal Server Error\n\n") ;
+        } else {
+            printf("HTTP/1.1 302 Found\n\n");
+            string location = determineLocation(statsFile, workersFile);
+            printf("Location: http://%s", location);
         }
-       if(method == "POST") {
-            int body;
-            cin >> body;
-            result = handleCrearCuenta(body);
-            error = 0;
-        }
-        
-    }
-
-    if (op == "movimientos") {
-        if(method == "GET" && query != NULL) {
-            int numero;
-            sscanf(query , "%d", &numero);
-            result = handleMovimientos(numero);
-            error = 0;
-        }
-    }
-
-    if (op == "deposito") {
-        if(method == "PUT") {
-            string body;
-            cin >> body;
-            vector<int> values = parseOperation(body);
-            if(values.size() == 2){
-                result = handleDepositar(values[0], values[1]);
-                error = 0;
-            }
-        }
-    }
-
-    if (op == "extraccion") {
-        if(method == "PUT") {
-            string body;
-            cin >> body;
-            vector<int> values = parseOperation(body);
-            if(values.size() == 2){
-                result = handleRetirar(values[0], values[1]);
-                error = 0;
-            }
-        }
-    }
+    }   
 
 
-    if(error) 
-        printf("Status: 400 Bad Request\n\n") ;
-    else printf("Status: 200 OK\n\n");
-    if(result.length() > 0) {
-        printf("%s\n", result.c_str());    
-    }
-    
     return 0;
 }
