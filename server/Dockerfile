@@ -20,11 +20,15 @@ RUN apt-get update && \
     apt-get install -y oracle-java8-installer && \
     apt-get clean
 
-RUN apt-get install -y vim && \
+RUN apt-get install -y nano && \
+	apt-get install -y dnsutils &&\
+	apt-get install -y iputils-ping &&\
     apt-get clean
 
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/
+
+RUN echo "networkaddress.cache.ttl=0" >> $JAVA_HOME/jre/lib/security/java.security
 
 #PREPARACION DE LA APLICACION
 RUN cd /home && chmod 777 gradlew \
@@ -34,3 +38,4 @@ RUN cd /home && chmod 777 gradlew && ./gradlew assemble
 
 CMD ["bash"]
 EXPOSE 9000
+WORKDIR /home
