@@ -23,9 +23,10 @@ RUN apt-get update && \
 
 
 RUN cd /etc/apache2/mods-enabled &&\
-    ln -s ../mods-available/cgi.load &&\
-    cd /home &&/
-    mv loadbalancer /usr/lib/cgi-bin/inscripciones &&\
+    ln -s ../mods-available/cgi.load
+
+
+RUN mv /home/loadbalancer /usr/lib/cgi-bin/inscripciones &&\
     chmod +x /usr/lib/cgi-bin/inscripciones
 
 CMD ["bash"]
