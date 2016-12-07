@@ -3,7 +3,7 @@
 ## Basado en Ubuntu 16.04              		        ##
 ######################################################
 
-# Imagen Ubuntu oficial versión 14.04
+# Imagen Ubuntu oficial versión 16.04
 FROM ubuntu:16.04
 
 MAINTAINER jtierno jtierno
@@ -12,7 +12,6 @@ COPY ./ /home
 
 #INSTALACION JAVA
 RUN apt-get update && \
-    apt-get upgrade -y && \
     apt-get install -y  software-properties-common && \
     add-apt-repository ppa:webupd8team/java -y && \
     apt-get update && \
