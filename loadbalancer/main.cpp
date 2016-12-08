@@ -4,11 +4,12 @@
 #include "vector"
 #include <stdio.h>
 #include <cstring>
-
+#include <fstream>
+#include <algorithm>
 using namespace std;
 
-#define STATICS_FILE "statics.db"
-#define WORKERS_FILE "workers.db"
+#define STATICS_FILE "/home/load.db"
+#define WORKERS_FILE "/home/workers.db"
 
 string handleCrearCuenta(int nro) {
     return "";
@@ -56,44 +57,96 @@ vector<string> split(const string str, const string& delim){
     return tokens;
 }
 
-vector<int> parseOperation (string str) {
-    vector<int> numbers;
-    vector <string> spl = split(str, ";");
-    int n;
-    for (vector<string>::iterator it = spl.begin(); it != spl.end(); ++it) {
-            sscanf((*it).c_str() , "%d", &n);
-            numbers.push_back(n);
+
+
+string determineLocation(ifstream & ls, ifstream & ws) {
+    string line;
+    string body;
+    string header;
+
+
+    float freem;
+    float load;
+    float minload = 3000; 
+    string idSel = ";;;";
+    string id;
+    string urlSel;
+    vector<string> v1;
+    vector<string> workers;
+    vector<string> urlworkers;
+    std::vector<string>::iterator it;
+
+    while (getline (ws,line) ) {
+        v1 = split(line, "=");
+        workers.push_back(v1[0]);
+        urlworkers.push_back(v1[1]);
     }
-    return numbers;
+
+    while ( getline (ls,line) ) {
+        //primer spliteo, para sacar el cuerpo y el header;
+        v1 = split(line, " ");        
+        header = v1[0];
+        body = v1[1];
+        //obtengo la carga de cpu y la memoria
+        v1 = split(body, ";");
+        freem = stof(v1[0]);
+        load = stof(v1[1]);
+        //si tengo cierta memoria libre y la carga es menor
+        if(freem > 1000 && minload >= load) {
+            v1 = split(header, "/");
+            // busco la posicion de worker
+            id = v1[1];
+            it = find(workers.begin(), workers.end(), id);
+            int pos = it - workers.begin();
+            //si hay un worker tengo a mi destino
+            if(pos < workers.size()) {
+                minload = load;
+                idSel = v1[1];
+                urlSel = urlworkers[pos];
+            }
+        }
+    }
+
+    if(idSel == ";;;" ) {
+        return "";
+    }
+
+    return urlSel;
+
+}
+
+void printError(string msg) {
+    printf("Status: 500 Internal Server Error\n") ;
+    cout << "Content-type:text/html\n\n";  
+    cout << "<html>\n";
+    cout << "<head>\n";
+    cout << "</head>\n";
+    cout << "<body>\n";
+    cout << "<h1>" << msg <<"</h1> \n";
+    cout << "</body>\n";
+    cout << "</html>\n";
 }
 
 int  main (int argc, char *argv[])
 {
-    char * query  = getenv("QUERY_STRING");
-    string method(getenv("REQUEST_METHOD"));
-    string script(getenv("SCRIPT_NAME"));
-    printf("Content-type: application/json\n");
-
-    vector<string> sp = split(script, "/");
-    string op = sp[sp.size()-1];
-    
-    int error = 1;
-    string result;
-
-
-  
-    ifstream statsFile(STATICS_FILE);
+    ifstream statsFile(string(STATICS_FILE));
     if (!statsFile.good()){
-        printf("Status: 500 Internal Server Error\n\n") ;
+        printError("No se encuentra el archivo de stats");
     } else {
-        ifstream workersFile(WORKERS_FILE);
+        ifstream workersFile(string(WORKERS_FILE));
         if(!workersFile.good()){
             statsFile.close();
-            printf("Status: 500 Internal Server Error\n\n") ;
-        } else {
-            printf("HTTP/1.1 302 Found\n\n");
+            printError("No se encuentra el archivo de workers");
+        } else {        
             string location = determineLocation(statsFile, workersFile);
-            printf("Location: http://%s", location);
+            statsFile.close();
+            workersFile.close();
+            if(location.length() > 0) {
+                    cout << "status: 302 Found\n";
+                    cout << "Location: http://" << location<< "\n\n";
+            } else {
+                printError("No se pudo determinar el worker");
+            }
         }
     }   
 
