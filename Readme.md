@@ -10,8 +10,9 @@ Para poder iniciar el sistema completo es necesario llevar acabo la siguiente se
   - Crear el container del loadbalancer.
   - Arrancar el servicio de statics  y la aplicación java en los containers server.
   - Configurar las direcciones ips de los servers en el loadbalancer.
+  - Importar los datos iniciales de la base de datos.
 
-### Crear una red bride
+### Crear una red bridge
 Esto es en el caso de correr todos en una misma máquina.
 ```sh
 $ sudo docker network create -d bridge dist
@@ -98,4 +99,22 @@ El último paso es editar el archivo *workers.db* en el loadbalancer para setear
 1=172.17.0.6:9000
 2=172.17.0.7:9000
 ```
+
+### Importar los datos iniciales de la base de datos.
+
+Los datos iniciales de la base de datos estan en dos scripts en la carpeta *database/scripts* del repositorio.
+
+Primero es necesario conectar con el cliente de cockroachdb a la database url de alguno de los roachs ya levantados con el usuario root
+
+```sh
+$ ./cockroach sql --url="postgresql://root@172.18.0.2:26257/fiuba?sslmode=disable"
+```
+
+Dentro de la consola correr
+
+```
+create database fiuba;
+set database=fiuba;
+```
+Luego es necesario correr el archivo *schema.sql* y luego el archivo *import.sql* (se pueden copiar y pegar)
 
