@@ -19,6 +19,7 @@ RUN apt-get update && \
 	apt-get install -y dnsutils &&\
 	apt-get install -y iputils-ping &&\
     apt-get install -y apache2 &&\
+    apt-get install -y expect &&\
     apt-get clean
 
 
