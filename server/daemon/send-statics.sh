@@ -2,9 +2,9 @@
 
 
 INTERVAL='60s'
-BROKER_URL='172.17.0.2'
 BROKER_PORT=1883
-IDUNICO='NUMERO'
+BROKER_URL='balancer'
+IDUNICO='CAMBIAR'
 TOPIC="computadoras/$IDUNICO/carga"
 
 echo "Se intentara enviar las notificaciones a $BROKER_URL:$BROKER_PORT con id $IDUNICO"
