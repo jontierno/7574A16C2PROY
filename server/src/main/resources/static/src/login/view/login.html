@@ -10,7 +10,7 @@
     	<form name="loginForm" >
 			<md-input-container>
 				<label>User</label>
-				<input name="username" ng-model="login.user.username" required md-maxlength="10" minlength="4" ng-change="login.change()">
+				<input name="username" ng-model="login.user.username" >
 				<div ng-messages="loginForm.username.$error" ng-show="loginForm.username.$dirty">
 					<div ng-message="required">Es requerido!</div>
 					<div ng-message="md-maxlength">Es muy largo!</div>
@@ -19,7 +19,7 @@
 			</md-input-container>
 			<md-input-container>
 			<label>Password</label>
-			<input name="password" ng-model="login.user.password" type="password" required md-maxlength="10" minlength="4" ng-change="login.change()">
+			<input name="password" ng-model="login.user.password" type="password" >
 			<div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$dirty">
 				<div ng-message="required">Es requerido!</div>
 				<div ng-message="md-maxlength">Es muy largo!</div>

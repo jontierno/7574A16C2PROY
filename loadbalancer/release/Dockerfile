@@ -30,5 +30,9 @@ RUN cd /etc/apache2/mods-enabled &&\
 RUN mv /home/loadbalancer /usr/lib/cgi-bin/inscripciones &&\
     chmod +x /usr/lib/cgi-bin/inscripciones
 
+RUN rm /var/www/html /index.html &&\
+    mv /home/index.html /var/www/html/
+
+
 CMD ["bash"]
 WORKDIR /home
